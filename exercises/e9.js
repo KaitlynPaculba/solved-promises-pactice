@@ -13,7 +13,8 @@
 
 export function iterate(arg) {
   // Your code goes here...
-  
+  console.log(arg);    
+  return arg + 1; 
 }
 
 /**
@@ -24,7 +25,8 @@ export function iterate(arg) {
 
 export function alwaysThrows() {
   // Your code goes here...
-
+  let err = new Error("OH NOES");
+  throw err;
 }
 
 /**
@@ -36,9 +38,10 @@ export function alwaysThrows() {
  * The function must be exported
  */
 
-export function onReject() {
+export function onReject(err) {
   // Your code goes here...
-
+  let decide = typeof err === 'object';
+  decide ? console.log(err.message) : console.log(err);
 }
 
 /**
@@ -63,10 +66,17 @@ export function onReject() {
  */
 
 // Your code goes here...
-export const promise;
-
-
-
+export const promise =  Promise.resolve((val) => val)
+  .then(iterate)
+  .then(iterate)
+  .then(iterate)
+  .then(iterate)
+  .then(alwaysThrows)
+  .then(iterate)
+  .then(iterate)
+  .then(iterate)
+  .then(iterate)
+  .catch(onReject); 
 // === TEST YOURSELF ===
 // Once you're finished run the test with "npm run test-9"
 // If the test has all tests passed, switch to the next exercise file
